@@ -1,0 +1,27 @@
+.app{
+    width: 100%;
+    position: relative;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 80px;
+    background-color: #FFFFFF;
+    padding: 15px 7px;
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+.btnWrapper{
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding-right: 15px;
+}
+.link{
+    text-decoration: none;
+}
