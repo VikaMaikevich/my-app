@@ -1,12 +1,12 @@
-import MyButton from "../MyButton/MyButton";
-import { useForm, useFieldArray } from "react-hook-form";
-import Error from "../Error/Error";
-import PropTypes from "prop-types";
-import { useGetAnArticleQuery } from "../../store/kataPostApi";
-import stl from "./ArticleForm.module.scss";
+import MyButton from '../MyButton/MyButton';
+import { useForm, useFieldArray } from 'react-hook-form';
+import Error from '../Error/Error';
+import PropTypes from 'prop-types';
+import { useGetAnArticleQuery } from '../../store/postApi';
+import stl from './ArticleForm.module.scss';
 
 const ArticleForm = ({ formTitle, slug, handleOnSubmit, isError, error }) => {
-  const { data } = useGetAnArticleQuery(slug ? slug : "");
+  const { data } = useGetAnArticleQuery(slug ? slug : '');
   const {
     register,
     formState: { errors, isValid },
@@ -23,10 +23,10 @@ const ArticleForm = ({ formTitle, slug, handleOnSubmit, isError, error }) => {
         : [{}],
     },
 
-    mode: "onChange",
+    mode: 'onChange',
   });
   const { fields, append, remove } = useFieldArray({
-    name: "tags",
+    name: 'tags',
     control,
   });
 
@@ -56,13 +56,13 @@ const ArticleForm = ({ formTitle, slug, handleOnSubmit, isError, error }) => {
             <label className={stl.label}>
               Title
               <input
-                {...register("title", {
-                  required: "The field must be filled in",
+                {...register('title', {
+                  required: 'The field must be filled in',
                   minLength: {
                     value: 3,
-                    message: "Minimum 3 characters",
+                    message: 'Minimum 3 characters',
                   },
-                  maxLength: { value: 35, message: "Maximum 35 characters" },
+                  maxLength: { value: 35, message: 'Maximum 35 characters' },
                 })}
                 placeholder="Title"
                 className={
@@ -70,20 +70,20 @@ const ArticleForm = ({ formTitle, slug, handleOnSubmit, isError, error }) => {
                 }
               />
               <div className={stl.error}>
-                {errors?.title && <p>{errors?.title?.message || "Error!"}</p>}
+                {errors?.title && <p>{errors?.title?.message || 'Error!'}</p>}
               </div>
             </label>
 
             <label className={stl.label}>
               Short description
               <input
-                {...register("description", {
-                  required: "The field must be filled in",
+                {...register('description', {
+                  required: 'The field must be filled in',
                   minLength: {
                     value: 3,
-                    message: "Minimum 3 characters",
+                    message: 'Minimum 3 characters',
                   },
-                  maxLength: { value: 250, message: "Maximum 250 characters" },
+                  maxLength: { value: 250, message: 'Maximum 250 characters' },
                 })}
                 placeholder="Short description"
                 type="text"
@@ -95,7 +95,7 @@ const ArticleForm = ({ formTitle, slug, handleOnSubmit, isError, error }) => {
               />
               <div className={stl.error}>
                 {errors?.description && (
-                  <p>{errors?.description?.message || "Error!"}</p>
+                  <p>{errors?.description?.message || 'Error!'}</p>
                 )}
               </div>
             </label>
@@ -103,8 +103,8 @@ const ArticleForm = ({ formTitle, slug, handleOnSubmit, isError, error }) => {
             <label className={stl.label}>
               Text
               <textarea
-                {...register("body", {
-                  required: "The field must be filled in",
+                {...register('body', {
+                  required: 'The field must be filled in',
                 })}
                 placeholder="Text"
                 type="text"
@@ -114,7 +114,7 @@ const ArticleForm = ({ formTitle, slug, handleOnSubmit, isError, error }) => {
                 }
               />
               <div className={stl.error}>
-                {errors?.body && <p>{errors?.body?.message || "Error!"}</p>}
+                {errors?.body && <p>{errors?.body?.message || 'Error!'}</p>}
               </div>
             </label>
             <label className={stl.label}>
@@ -125,7 +125,7 @@ const ArticleForm = ({ formTitle, slug, handleOnSubmit, isError, error }) => {
                     <div className={stl.inputTag} key={item.id}>
                       <input
                         {...register(`tags.${index}.name`, {
-                          required: "The field must be filled in",
+                          required: 'The field must be filled in',
                         })}
                         placeholder="Tag"
                         type="text"
@@ -140,7 +140,7 @@ const ArticleForm = ({ formTitle, slug, handleOnSubmit, isError, error }) => {
                         type="default"
                         color="#F5222D"
                         onClick={() => remove(index)}
-                        style={{ padding: "0 36px" }}
+                        style={{ padding: '0 36px' }}
                       />
                     </div>
                   ))}
@@ -149,8 +149,8 @@ const ArticleForm = ({ formTitle, slug, handleOnSubmit, isError, error }) => {
                   type="default"
                   children="Add tag"
                   color="#1890FF"
-                  onClick={() => append({ name: "" })}
-                  style={{ padding: "0 36px" }}
+                  onClick={() => append({ name: '' })}
+                  style={{ padding: '0 36px' }}
                 />
               </div>
             </label>
@@ -160,7 +160,7 @@ const ArticleForm = ({ formTitle, slug, handleOnSubmit, isError, error }) => {
               children="Send"
               color="#1890FF"
               htmlType="submit"
-              style={{ width: "318px" }}
+              style={{ width: '318px' }}
             />
           </form>
         </div>

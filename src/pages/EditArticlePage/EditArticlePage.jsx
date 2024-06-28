@@ -1,8 +1,8 @@
-import ArticleForm from "../../components/ArticleForm/ArticleForm";
-import { useUpdateAnArticleMutation } from "../../store/kataPostApi";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import stl from "./EditArticlePage.module.scss";
+import ArticleForm from '../../components/ArticleForm/ArticleForm';
+import { useUpdateAnArticleMutation } from '../../store/postApi';
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import stl from './EditArticlePage.module.scss';
 
 const EditArticlePage = () => {
   const { slug } = useParams();

@@ -1,11 +1,11 @@
-import ArticleCard from "../../components/ArticleCard/ArticleCard";
-import MyPagination from "../../components/MyPagination/MyPagination";
-import Loader from "../../components/Loader/Loader";
-import Error from "../../components/Error/Error";
-import { useSelector } from "react-redux";
-import { useGetAllArticlesQuery } from "../../store/kataPostApi";
+import ArticleCard from '../../components/ArticleCard/ArticleCard';
+import MyPagination from '../../components/MyPagination/MyPagination';
+import Loader from '../../components/Loader/Loader';
+import Error from '../../components/Error/Error';
+import { useSelector } from 'react-redux';
+import { useGetAllArticlesQuery } from '../../store/postApi';
 
-import stl from "./AllArticlesPage.module.scss";
+import stl from './AllArticlesPage.module.scss';
 
 const AllArticlesPage = () => {
   const currentPage = useSelector((state) => state.articles.currentPage);

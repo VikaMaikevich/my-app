@@ -1,7 +1,7 @@
-import ArticleForm from "../../components/ArticleForm/ArticleForm";
-import { useCreateAnArticleMutation } from "../../store/kataPostApi";
-import { useNavigate } from "react-router-dom";
-import stl from "./CreateArticlePage.module.scss";
+import ArticleForm from '../../components/ArticleForm/ArticleForm';
+import { useCreateAnArticleMutation } from '../../store/postApi';
+import { useNavigate } from 'react-router-dom';
+import stl from './CreateArticlePage.module.scss';
 
 const CreateArticlePage = () => {
   const [addArticle, { isError, error }] = useCreateAnArticleMutation();
@@ -16,7 +16,7 @@ const CreateArticlePage = () => {
       },
     };
     await addArticle(newArticle).unwrap();
-    navigate("/", { replace: true });
+    navigate('/', { replace: true });
   };
   return (
     <div className={stl.content}>

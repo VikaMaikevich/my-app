@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const kataPostsApi = createApi({
-  reducerPath: "kataPostsApi",
+export const postsApi = createApi({
+  reducerPath: "postsApi",
   tagTypes: ["Articles", "Article"],
   baseQuery: fetchBaseQuery({
     baseUrl: `https://blog.kata.academy/api/`,
@@ -54,6 +54,7 @@ export const kataPostsApi = createApi({
       }),
       invalidatesTags: [{ type: "Articles", id: "LIST" }],
     }),
+
     updateAnArticle: build.mutation({
       query: ({ body, slug }) => ({
         url: `articles/${slug}`,
@@ -66,6 +67,7 @@ export const kataPostsApi = createApi({
       }),
       invalidatesTags: [{ type: "Articles", id: "LIST" }, "Article"],
     }),
+
     deleteAnArticle: build.mutation({
       query: (slug) => ({
         url: `articles/${slug}`,
@@ -77,6 +79,7 @@ export const kataPostsApi = createApi({
       }),
       invalidatesTags: [{ type: "Articles", id: "LIST" }],
     }),
+
     favoriteAnArticle: build.mutation({
       query: (slug) => ({
         url: `articles/${slug}/favorite`,
@@ -89,6 +92,7 @@ export const kataPostsApi = createApi({
       }),
       invalidatesTags: [{ type: "Articles", id: "LIST" }, "Article"],
     }),
+
     unfavoriteAnArticle: build.mutation({
       query: (slug) => ({
         url: `articles/${slug}/favorite`,
@@ -111,4 +115,4 @@ export const {
   useDeleteAnArticleMutation,
   useFavoriteAnArticleMutation,
   useUnfavoriteAnArticleMutation,
-} = kataPostsApi;
+} = postsApi;

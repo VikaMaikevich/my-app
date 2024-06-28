@@ -1,20 +1,20 @@
-import ArticleHeader from "../../components/ArticleHeader/ArticleHeader";
-import ArticleDescription from "../../components/ArticleDescription/ArticleDescription";
-import ArticleTag from "../../components/ArticleTag/ArticleTag";
-import ArticleBody from "../../components/ArticleBody/ArticleBody";
-import UserProfile from "../../components/UserProfile/UserProfile";
-import { useParams, Link } from "react-router-dom";
+import ArticleHeader from '../../components/ArticleHeader/ArticleHeader';
+import ArticleDescription from '../../components/ArticleDescription/ArticleDescription';
+import ArticleTag from '../../components/ArticleTag/ArticleTag';
+import ArticleBody from '../../components/ArticleBody/ArticleBody';
+import UserProfile from '../../components/UserProfile/UserProfile';
+import { useParams, Link } from 'react-router-dom';
 import {
   useGetAnArticleQuery,
   useDeleteAnArticleMutation,
-} from "../../store/kataPostApi";
-import Loader from "../../components/Loader/Loader";
-import Error from "../../components/Error/Error";
-import { useSelector } from "react-redux";
-import stl from "./ArticlePage.module.scss";
-import MyButton from "../../components/MyButton/MyButton";
-import { useNavigate } from "react-router-dom";
-import { Popconfirm, message } from "antd";
+} from '../../store/postApi';
+import Loader from '../../components/Loader/Loader';
+import Error from '../../components/Error/Error';
+import { useSelector } from 'react-redux';
+import stl from './ArticlePage.module.scss';
+import MyButton from '../../components/MyButton/MyButton';
+import { useNavigate } from 'react-router-dom';
+import { Popconfirm, message } from 'antd';
 
 const ArticlePage = () => {
   const { slug } = useParams();
@@ -25,8 +25,8 @@ const ArticlePage = () => {
 
   const confirm = async () => {
     await deleteAnArticle(slug);
-    navigate("/", { replace: true });
-    message.success("The article was successfully deleted");
+    navigate('/', { replace: true });
+    message.success('The article was successfully deleted');
   };
 
   const active = !data?.article ? null : (
@@ -54,7 +54,7 @@ const ArticlePage = () => {
             <Popconfirm
               title="Are you sure to delete this article?"
               style={{
-                width: "240px",
+                width: '240px',
               }}
               onConfirm={confirm}
               okText="Yes"
@@ -66,7 +66,7 @@ const ArticlePage = () => {
                 size="small"
                 type="default"
                 color="#F5222D"
-                style={{ padding: "0 19px" }}
+                style={{ padding: '0 19px' }}
               />
             </Popconfirm>
 
@@ -76,7 +76,7 @@ const ArticlePage = () => {
                 size="small"
                 type="default"
                 color="#52C41A"
-                style={{ padding: "0 19px" }}
+                style={{ padding: '0 19px' }}
               />
             </Link>
           </div>
@@ -93,7 +93,7 @@ const ArticlePage = () => {
   const spiner = isLoading ? <Loader /> : null;
   const errorMessage = isError ? (
     <Error
-      errorMessage={error.data.errors?.message || "unknown error"}
+      errorMessage={error.data.errors?.message || 'unknown error'}
       errorStatus={error.status || error.originalStatus}
     />
   ) : null;
