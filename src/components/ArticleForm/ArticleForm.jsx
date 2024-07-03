@@ -22,19 +22,16 @@ const ArticleForm = ({ formTitle, slug, handleOnSubmit, isError, error }) => {
         ? data.article.tagList.map((item) => ({ name: item }))
         : [{}],
     },
-
     mode: 'onChange',
   });
+
   const { fields, append, remove } = useFieldArray({
     name: 'tags',
     control,
   });
 
   const errorMessage = isError ? (
-    <Error
-      errorMessage={error.data.errors.message}
-      errorStatus={error.status}
-    />
+    <Error errorMessage={error.data.errors.message} errorStatus={error.status} />
   ) : null;
 
   const onSubmit = (data) => {
@@ -48,11 +45,7 @@ const ArticleForm = ({ formTitle, slug, handleOnSubmit, isError, error }) => {
       {!isError && (
         <div className={stl.wrapper}>
           <h1>{formTitle}</h1>
-          <form
-            name="articleForm"
-            onSubmit={handleSubmit(onSubmit)}
-            className={stl.form}
-          >
+          <form name="articleForm" onSubmit={handleSubmit(onSubmit)} className={stl.form}>
             <label className={stl.label}>
               Title
               <input
@@ -62,12 +55,16 @@ const ArticleForm = ({ formTitle, slug, handleOnSubmit, isError, error }) => {
                     value: 3,
                     message: 'Minimum 3 characters',
                   },
-                  maxLength: { value: 35, message: 'Maximum 35 characters' },
+                  maxLength: {
+                    value: 35,
+                    message: 'Maximum 35 characters',
+                  },
+                  validate: {
+                    noSpaces: (value) => !!value.trim() || 'Title cannot be empty or just spaces',
+                  },
                 })}
                 placeholder="Title"
-                className={
-                  !errors?.title ? stl.input : `${stl.input} ${stl.input_error}`
-                }
+                className={!errors?.title ? stl.input : `${stl.input} ${stl.input_error}`}
               />
               <div className={stl.error}>
                 {errors?.title && <p>{errors?.title?.message || 'Error!'}</p>}
@@ -83,20 +80,20 @@ const ArticleForm = ({ formTitle, slug, handleOnSubmit, isError, error }) => {
                     value: 3,
                     message: 'Minimum 3 characters',
                   },
-                  maxLength: { value: 250, message: 'Maximum 250 characters' },
+                  maxLength: {
+                    value: 250,
+                    message: 'Maximum 250 characters',
+                  },
+                  validate: {
+                    noSpaces: (value) => !!value.trim() || 'Description cannot be empty or just spaces',
+                  },
                 })}
                 placeholder="Short description"
                 type="text"
-                className={
-                  !errors?.description
-                    ? stl.input
-                    : `${stl.input} ${stl.input_error}`
-                }
+                className={!errors?.description ? stl.input : `${stl.input} ${stl.input_error}`}
               />
               <div className={stl.error}>
-                {errors?.description && (
-                  <p>{errors?.description?.message || 'Error!'}</p>
-                )}
+                {errors?.description && <p>{errors?.description?.message || 'Error!'}</p>}
               </div>
             </label>
 
@@ -105,13 +102,14 @@ const ArticleForm = ({ formTitle, slug, handleOnSubmit, isError, error }) => {
               <textarea
                 {...register('body', {
                   required: 'The field must be filled in',
+                  validate: {
+                    noSpaces: (value) => !!value.trim() || 'Body cannot be empty or just spaces',
+                  },
                 })}
                 placeholder="Text"
                 type="text"
                 rows={6}
-                className={
-                  !errors?.body ? stl.input : `${stl.input} ${stl.input_error}`
-                }
+                className={!errors?.body ? stl.input : `${stl.input} ${stl.input_error}`}
               />
               <div className={stl.error}>
                 {errors?.body && <p>{errors?.body?.message || 'Error!'}</p>}
@@ -129,11 +127,7 @@ const ArticleForm = ({ formTitle, slug, handleOnSubmit, isError, error }) => {
                         })}
                         placeholder="Tag"
                         type="text"
-                        className={
-                          !errors?.tags
-                            ? stl.input
-                            : `${stl.input} ${stl.input_error}`
-                        }
+                        className={!errors?.tags ? stl.input : `${stl.input} ${stl.input_error}`}
                       />
                       <MyButton
                         children="Delete"
@@ -168,6 +162,7 @@ const ArticleForm = ({ formTitle, slug, handleOnSubmit, isError, error }) => {
     </div>
   );
 };
+
 ArticleForm.propTypes = {
   formTitle: PropTypes.string,
   slug: PropTypes.string,
@@ -175,4 +170,6 @@ ArticleForm.propTypes = {
   isError: PropTypes.bool,
   error: PropTypes.object,
 };
+
 export default ArticleForm;
+

@@ -15,13 +15,15 @@ const ArticleTag = ({ tagList }) => {
     return str + "...";
   };
 
-  const elements = tagList.map((tag, i) => {
-    return (
-      <Tag className={stl.tag} key={`${kitcut(tag)} ${i}`}>
-        {kitcut(tag)}
-      </Tag>
-    );
-  });
+  const elements = tagList
+    .filter((tag) => tag.trim() !== '')  //Пустые теги
+    .map((tag, i) => {
+      return (
+        <Tag className={stl.tag} key={`${kitcut(tag)} ${i}`}>
+          {kitcut(tag)}
+        </Tag>
+      );
+    });
   return <div className={stl.tag}>{elements}</div>;
 };
 

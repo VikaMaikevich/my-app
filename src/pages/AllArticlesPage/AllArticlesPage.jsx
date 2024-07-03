@@ -2,13 +2,24 @@ import ArticleCard from '../../components/ArticleCard/ArticleCard';
 import MyPagination from '../../components/MyPagination/MyPagination';
 import Loader from '../../components/Loader/Loader';
 import Error from '../../components/Error/Error';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useGetAllArticlesQuery } from '../../store/postApi';
+import { useEffect } from 'react';
+import { togglePage } from "../../store/reducers/articleSlice";
 
 import stl from './AllArticlesPage.module.scss';
 
 const AllArticlesPage = () => {
   const currentPage = useSelector((state) => state.articles.currentPage);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const savedPage = localStorage.getItem("currentPage");
+    if (savedPage) {
+      dispatch(togglePage(Number(savedPage)));  // текущая страница
+    }
+  }, [dispatch]);
+
   const {
     data = [],
     isLoading,
